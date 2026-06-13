@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vision 1,000 · CCCC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Cinzel:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0A0906;--dark:#111009;--dark2:#1A1810;--dark3:#242018;
+  --gold:#C4922A;--gold2:#E0AE50;--gold3:#F0CA78;
+  --gold-bg:#FBF3E3;--gold-bdr:#D4A855;
+  --white:#FFFEF9;--off:#F6F1E7;--parch:#EFE9D8;
+  --ink:#18160F;--ink2:#3A3626;--ink3:#6B6450;
+  --bdr:#D8CEB0;--bdr2:#E8E0C8;
+  --nav-h:62px;--max:920px;--wide:1120px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:var(--ink);background:var(--white);overflow-x:hidden}
+
+/* NAV */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  height:var(--nav-h);background:var(--black);
+  border-bottom:1px solid rgba(196,146,42,.2);
+  display:flex;align-items:center;padding:0 1.25rem;gap:0;
+}
+.nav-home{
+  display:flex;align-items:center;gap:7px;text-decoration:none;
+  padding:0 14px 0 0;margin-right:6px;
+  border-right:1px solid rgba(196,146,42,.18);
+  height:var(--nav-h);color:var(--gold2);
+  font-family:'Cinzel',serif;font-size:10px;letter-spacing:.22em;font-weight:500;
+  white-space:nowrap;transition:color .2s;flex-shrink:0;
+}
+.nav-home:hover{color:var(--gold3)}
+.nav-home svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.nav-scroll{display:flex;align-items:center;flex:1;overflow-x:auto;scrollbar-width:none;padding-left:2px}
+.nav-scroll::-webkit-scrollbar{display:none}
+.nav-links{display:flex;list-style:none;gap:0;white-space:nowrap}
+.nav-links a{
+  display:block;font-family:'Inter',sans-serif;font-size:10.5px;font-weight:500;
+  letter-spacing:.08em;color:rgba(255,255,255,.38);text-decoration:none;
+  padding:0 10px;line-height:var(--nav-h);transition:color .18s;white-space:nowrap;
+}
+.nav-links a:hover{color:rgba(224,174,80,.8)}
+.nav-links a.active{color:var(--gold2);border-bottom:2px solid var(--gold2)}
+.nav-blog-btn{margin-left:auto;padding-left:10px;border-left:1px solid rgba(196,146,42,.18);flex-shrink:0}
+.nav-blog-btn a{
+  display:inline-flex;align-items:center;gap:5px;
+  font-family:'Inter',sans-serif;font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--gold2);text-decoration:none;
+  border:1px solid rgba(196,146,42,.35);border-radius:3px;padding:5px 11px;
+  transition:background .2s,color .2s,border-color .2s;
+}
+.nav-blog-btn a:hover{background:var(--gold);color:var(--black);border-color:var(--gold)}
+.nav-blog-btn svg{width:11px;height:11px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* PAGES */
+.page{display:none}.page.active{display:block}
+
+/* COVER */
+#cover{
+  min-height:100vh;background:var(--black);position:relative;overflow:hidden;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:calc(var(--nav-h) + 60px) 2rem 90px;
+}
+.cv-grid{position:absolute;inset:0;pointer-events:none;
+  background-image:repeating-linear-gradient(0deg,transparent,transparent 79px,rgba(196,146,42,.04) 80px),
+  repeating-linear-gradient(90deg,transparent,transparent 79px,rgba(196,146,42,.025) 80px);}
+.cv-glow{position:absolute;width:700px;height:700px;top:50%;left:50%;transform:translate(-50%,-58%);
+  background:radial-gradient(circle,rgba(196,146,42,.13) 0%,transparent 65%);pointer-events:none;}
+.cv-glow2{position:absolute;width:280px;height:280px;bottom:-40px;right:-40px;
+  background:radial-gradient(circle,rgba(139,32,32,.1) 0%,transparent 65%);pointer-events:none;}
+.cv-watermark{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-54%);
+  font-family:'Cinzel',serif;font-size:clamp(80px,14vw,160px);font-weight:600;
+  color:transparent;-webkit-text-stroke:1px rgba(196,146,42,.07);
+  line-height:1;pointer-events:none;user-select:none;white-space:nowrap;z-index:0;
+}
+.cv-badge{
+  position:relative;z-index:1;display:inline-block;
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:.38em;font-weight:500;
+  color:var(--gold2);border:1px solid rgba(196,146,42,.3);padding:5px 18px;
+  border-radius:2px;margin-bottom:2rem;text-transform:uppercase;
+}
+.cv-eye{
+  position:relative;z-index:1;font-family:'Inter',sans-serif;font-size:9.5px;
+  font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1.1rem;
+}
+.cv-title{
+  position:relative;z-index:1;font-family:'Cormorant Garamond',serif;
+  font-size:clamp(40px,7vw,80px);font-weight:300;color:#F5EDDA;line-height:1.05;margin-bottom:.3rem;
+}
+.cv-title strong{font-weight:500;color:var(--gold2);display:block}
+.cv-sub{
+  position:relative;z-index:1;font-family:'Cormorant Garamond',serif;
+  font-size:clamp(14px,2vw,19px);font-style:italic;color:rgba(240,234,214,.4);
+  margin-bottom:2.75rem;letter-spacing:.03em;
+}
+.cv-verses{
+  position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:1rem;
+  max-width:620px;width:100%;margin:0 auto 2.5rem;
+}
+@media(max-width:520px){.cv-verses{grid-template-columns:1fr}}
+.cv-verse{
+  border:1px solid rgba(196,146,42,.18);border-top:2px solid rgba(196,146,42,.45);
+  padding:.9rem 1.15rem;text-align:left;background:rgba(255,255,255,.02);
+  border-radius:0 0 4px 4px;transition:border-top-color .25s,background .25s;
+}
+.cv-verse:hover{border-top-color:var(--gold2);background:rgba(196,146,42,.06)}
+.cv-verse p{font-family:'Cormorant Garamond',serif;font-size:14px;font-style:italic;color:rgba(240,234,214,.78);line-height:1.68}
+.cv-verse cite{display:block;font-family:'Inter',sans-serif;font-size:8.5px;letter-spacing:.22em;color:var(--gold);margin-top:.55rem;font-style:normal;font-weight:700}
+.cv-desc{position:relative;z-index:1;max-width:460px;font-size:12px;line-height:1.85;color:rgba(240,234,214,.32);letter-spacing:.03em;margin-bottom:2rem}
+.cv-scroll{
+  position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);z-index:1;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  color:rgba(240,234,214,.22);font-size:8.5px;letter-spacing:.22em;
+  font-family:'Inter',sans-serif;animation:pulse-d 2.6s ease-in-out infinite;cursor:pointer;
+}
+.cv-scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,rgba(196,146,42,.45),transparent)}
+@keyframes pulse-d{0%,100%{transform:translateX(-50%) translateY(0);opacity:.5}50%{transform:translateX(-50%) translateY(8px);opacity:1}}
+
+/* SECTION SYSTEM */
+.s{padding:88px 2rem;position:relative}
+.s-inner{max-width:var(--max);margin:0 auto}
+.s-inner.wide{max-width:var(--wide)}
+.s-light{background:var(--white)}
+.s-off{background:var(--off)}
+.s-parch{background:var(--parch)}
+.s-dark{background:var(--dark);color:#F0EAD6}
+.s-black{background:var(--black);color:#F0EAD6}
+.s-off::before,.s-parch::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,transparent,rgba(196,146,42,.18) 25%,rgba(196,146,42,.35) 50%,rgba(196,146,42,.18) 75%,transparent);}
+.s-dark::before,.s-black::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(196,146,42,.4) 30%,rgba(224,174,80,.6) 50%,rgba(196,146,42,.4) 70%,transparent);}
+
+/* EYEBROW */
+.eyebrow{font-family:'Inter',sans-serif;font-size:9.5px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem;display:flex;align-items:center;gap:10px}
+.eyebrow::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--gold),transparent);max-width:60px;opacity:.4}
+.s-dark .eyebrow,.s-black .eyebrow{color:var(--gold2)}
+.s-dark .eyebrow::after,.s-black .eyebrow::after{background:linear-gradient(90deg,var(--gold2),transparent)}
+
+/* TITLES */
+.s-title{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,4.5vw,50px);font-weight:400;line-height:1.06;color:var(--ink);margin-bottom:.4rem}
+.s-title em{color:var(--gold);font-style:normal;font-weight:600}
+.s-dark .s-title,.s-black .s-title{color:#F5EDDA}
+.s-dark .s-title em,.s-black .s-title em{color:var(--gold2)}
+.s-rule{width:52px;height:3px;background:var(--gold);border-radius:2px;margin:1.25rem 0 2.25rem}
+.s-dark .s-rule,.s-black .s-rule{background:var(--gold2);opacity:.7}
+.s-lead{font-family:'Cormorant Garamond',serif;font-size:19px;line-height:1.75;color:var(--ink2);max-width:640px;margin-bottom:2.5rem}
+.s-dark .s-lead,.s-black .s-lead{color:rgba(240,234,214,.6)}
+
+/* VISION BOX */
+.vision-box{
+  background:var(--dark);border:1px solid rgba(196,146,42,.25);border-left:4px solid var(--gold);
+  border-radius:0 8px 8px 0;padding:2.5rem 3rem;margin-bottom:3rem;position:relative;overflow:hidden;
+}
+.vision-box::before{content:'"';position:absolute;right:1.5rem;top:-1rem;font-family:'Cormorant Garamond',serif;font-size:160px;color:rgba(196,146,42,.06);line-height:1;pointer-events:none}
+.vision-box p{font-family:'Cormorant Garamond',serif;font-size:clamp(19px,2.6vw,26px);font-style:italic;color:var(--gold3);line-height:1.65;position:relative;z-index:1}
+.vision-box cite{display:block;font-family:'Inter',sans-serif;font-size:9.5px;letter-spacing:.22em;color:rgba(196,146,42,.55);margin-top:1.1rem;font-style:normal;font-weight:700;position:relative;z-index:1}
+
+/* PILLARS */
+.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--bdr2);border:1px solid var(--bdr2);border-radius:8px;overflow:hidden;margin-top:2rem}
+.pillar{background:var(--white);padding:1.5rem;position:relative;transition:background .2s}
+.s-off .pillar{background:var(--off)}
+.pillar:hover{background:var(--gold-bg)}
+.pillar::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--bdr2);transition:background .2s}
+.pillar:hover::before{background:var(--gold)}
+.p-lbl{font-family:'Inter',sans-serif;font-size:9px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem}
+.p-val{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--ink);line-height:1.55}
+
+/* STAT BAND */
+.stat-band{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:rgba(196,146,42,.18);border:1px solid rgba(196,146,42,.18);border-radius:8px;overflow:hidden;margin:0}
+.stat-cell{background:var(--dark2);padding:1.75rem 1.5rem;text-align:center}
+.stat-n{font-family:'Cinzel',serif;font-size:36px;font-weight:600;color:var(--gold2);line-height:1;margin-bottom:.4rem}
+.stat-l{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(240,234,214,.4);font-weight:600}
+
+/* BLOCKS */
+.blocks{display:flex;flex-direction:column;gap:0}
+.blk{display:flex;gap:0;border-bottom:1px solid var(--bdr2);padding:2rem 0}
+.blk:first-child{padding-top:0}
+.blk:last-child{border-bottom:none}
+.blk-num{width:52px;min-width:52px;font-family:'Cinzel',serif;font-size:28px;font-weight:600;color:rgba(196,146,42,.18);line-height:1;padding-top:4px;flex-shrink:0;transition:color .2s}
+.blk:hover .blk-num{color:rgba(196,146,42,.4)}
+.s-dark .blk-num,.s-black .blk-num{color:rgba(224,174,80,.12)}
+.s-dark .blk:hover .blk-num,.s-black .blk:hover .blk-num{color:rgba(224,174,80,.35)}
+.s-dark .blk{border-color:rgba(255,255,255,.07)}
+.s-black .blk{border-color:rgba(255,255,255,.06)}
+.blk-body{flex:1}
+.blk-hrow{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;margin-bottom:.65rem;flex-wrap:wrap}
+.blk-h{font-family:'Inter',sans-serif;font-size:13.5px;font-weight:600;color:var(--ink)}
+.s-dark .blk-h,.s-black .blk-h{color:#F0EAD6}
+.blk-ref{font-family:'Cormorant Garamond',serif;font-size:13px;font-style:italic;color:var(--gold);white-space:nowrap;flex-shrink:0}
+.s-dark .blk-ref,.s-black .blk-ref{color:var(--gold2)}
+.blk-p{font-family:'Cormorant Garamond',serif;font-size:17.5px;color:var(--ink2);line-height:1.74}
+.s-dark .blk-p,.s-black .blk-p{color:rgba(240,234,214,.68)}
+.blk-p+.blk-p{margin-top:.85rem}
+
+/* PULL QUOTE */
+.pq{border-left:3px solid var(--gold);padding:1.25rem 1.75rem;margin:1.75rem 0;background:var(--gold-bg);border-radius:0 6px 6px 0;position:relative}
+.pq::before{content:'"';position:absolute;left:4px;top:-8px;font-family:'Cormorant Garamond',serif;font-size:60px;color:var(--gold);line-height:1;opacity:.22}
+.pq p{font-family:'Cormorant Garamond',serif;font-size:19px;font-style:italic;color:var(--gold);line-height:1.68;position:relative;z-index:1}
+.pq cite{display:block;font-family:'Inter',sans-serif;font-size:9px;color:var(--ink3);margin-top:.6rem;letter-spacing:.16em;font-style:normal;font-weight:700;position:relative;z-index:1}
+.s-dark .pq,.s-black .pq{background:rgba(196,146,42,.08);border-color:var(--gold2)}
+.s-dark .pq p,.s-black .pq p{color:rgba(240,234,214,.85)}
+
+/* GRID */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:2rem}
+@media(max-width:680px){.two-col{grid-template-columns:1fr}}
+.card{border:1px solid var(--bdr2);border-top:3px solid var(--gold);border-radius:0 0 8px 8px;padding:1.5rem;background:var(--white)}
+.card-title{font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid var(--bdr2);padding-bottom:.75rem;margin-bottom:1rem}
+.card ul{list-style:none}
+.card ul li{font-family:'Cormorant Garamond',serif;font-size:16.5px;color:var(--ink2);line-height:1.65;padding-left:1.25rem;position:relative;margin-bottom:.2rem}
+.card ul li::before{content:'›';position:absolute;left:0;color:var(--gold);font-size:18px;line-height:1.3}
+.card-note{font-family:'Cormorant Garamond',serif;font-size:13px;font-style:italic;color:var(--gold);margin-top:1rem}
+
+/* IMG PLACEHOLDER */
+.img-ph{
+  background:var(--dark3);border:1px dashed rgba(196,146,42,.3);border-radius:6px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:.75rem;padding:2rem;color:rgba(196,146,42,.45);min-height:200px;position:relative;overflow:hidden;
+}
+.img-ph::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 8px,rgba(196,146,42,.025) 8px,rgba(196,146,42,.025) 9px)}
+.img-ph svg{width:32px;height:32px;fill:none;stroke:currentColor;stroke-width:1.2;position:relative;z-index:1}
+.img-ph span{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;position:relative;z-index:1}
+.img-ph-sm{min-height:140px}
+.img-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:2rem 0}
+.img-grid-3{display:grid;grid-template-columns:2fr 1fr 1fr;gap:1rem;margin:2rem 0}
+@media(max-width:600px){.img-grid,.img-grid-3{grid-template-columns:1fr}}
+
+/* PROGRAM CARDS */
+.prog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1rem;margin:2rem 0}
+.prog-card{background:var(--dark2);border:1px solid rgba(196,146,42,.15);border-top:3px solid rgba(196,146,42,.4);border-radius:0 0 8px 8px;padding:1.5rem;transition:border-top-color .2s,transform .2s}
+.prog-card:hover{border-top-color:var(--gold2);transform:translateY(-3px)}
+.prog-icon{font-size:22px;margin-bottom:.75rem;color:var(--gold2)}
+.prog-name{font-family:'Inter',sans-serif;font-size:12.5px;font-weight:600;color:#F0EAD6;margin-bottom:.4rem}
+.prog-verse{font-family:'Cormorant Garamond',serif;font-size:13px;font-style:italic;color:var(--gold);margin-bottom:.5rem}
+.prog-desc{font-family:'Cormorant Garamond',serif;font-size:15px;color:rgba(240,234,214,.62);line-height:1.62}
+.prog-tag{display:inline-block;margin-top:.75rem;font-family:'Inter',sans-serif;font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);background:rgba(196,146,42,.1);border:1px solid rgba(196,146,42,.25);border-radius:2px;padding:3px 8px}
+
+/* EPH BOX */
+.eph-box{border:1px solid rgba(196,146,42,.3);border-left:4px solid var(--gold2);border-radius:0 10px 10px 0;padding:2rem 2.5rem;margin:2rem 0;background:rgba(196,146,42,.05)}
+.eph-ref{font-family:'Inter',sans-serif;font-size:9.5px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--gold2);margin-bottom:.5rem}
+.eph-box>p{font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;color:var(--gold3);line-height:1.65;margin-bottom:.85rem}
+.eph-expl{font-family:'Cormorant Garamond',serif;font-size:16.5px;color:rgba(240,234,214,.68);line-height:1.7}
+.eph-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:1.5rem}
+@media(max-width:640px){.eph-cols{grid-template-columns:1fr}}
+.eph-col{border-left:2px solid rgba(196,146,42,.4);padding-left:.9rem}
+.eph-col h4{font-family:'Cinzel',serif;font-size:11px;font-weight:600;color:var(--gold2);margin-bottom:.4rem;letter-spacing:.08em}
+.eph-col p{font-family:'Cormorant Garamond',serif;font-size:15px;color:rgba(240,234,214,.65);line-height:1.62}
+
+/* SCHOOL TRACKS */
+.tracks{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem;margin:2rem 0}
+.track{background:var(--white);border:1px solid var(--bdr2);border-top:4px solid var(--bdr);border-radius:0 0 8px 8px;padding:1.75rem;transition:border-top-color .2s,transform .2s}
+.s-parch .track,.s-off .track{background:var(--white)}
+.track:hover{border-top-color:var(--gold);transform:translateY(-3px)}
+.track-badge{display:inline-block;font-family:'Cinzel',serif;font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(196,146,42,.3);padding:3px 9px;border-radius:2px;margin-bottom:.75rem}
+.track-name{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:500;color:var(--ink);line-height:1.2;margin-bottom:.65rem}
+.track-desc{font-family:'Cormorant Garamond',serif;font-size:15.5px;color:var(--ink2);line-height:1.65;margin-bottom:1rem}
+.track-list{list-style:none}
+.track-list li{font-family:'Inter',sans-serif;font-size:11px;color:var(--ink2);padding-left:1.1rem;position:relative;line-height:1.75}
+.track-list li::before{content:'→';position:absolute;left:0;color:var(--gold);font-size:10px;top:2px}
+.track-ref{display:block;font-family:'Cormorant Garamond',serif;font-size:13px;font-style:italic;color:var(--gold);margin-top:.75rem}
+
+/* ORG */
+.org{display:flex;flex-direction:column;align-items:center;gap:0;margin:2.5rem 0}
+.org-row{display:flex;justify-content:center;gap:1.5rem;width:100%}
+.org-line{width:1px;height:32px;background:linear-gradient(to bottom,var(--gold),rgba(196,146,42,.3))}
+.org-hbar{height:1px;background:linear-gradient(90deg,transparent,var(--gold) 20%,var(--gold) 80%,transparent);width:40%}
+.org-node{border:1px solid var(--bdr);border-radius:8px;padding:1rem 1.4rem;text-align:center;background:var(--white);min-width:180px;max-width:280px}
+.org-node.top{background:var(--dark);border-color:rgba(196,146,42,.4);border-top:3px solid var(--gold)}
+.org-node.top .on-t{color:#F0EAD6}
+.on-t{font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:var(--ink)}
+.on-s{font-family:'Cormorant Garamond',serif;font-size:13.5px;font-style:italic;color:var(--ink3);margin-top:.35rem;line-height:1.5}
+.org-node.top .on-s{color:rgba(240,234,214,.5)}
+
+/* TIMELINE */
+.timeline{display:flex;flex-direction:column;gap:0;margin-top:2rem;position:relative}
+.timeline::before{content:'';position:absolute;left:52px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--gold),rgba(196,146,42,.15))}
+.tl-item{display:flex;gap:1.5rem;align-items:flex-start;padding:1.5rem 0}
+.tl-badge{width:56px;min-width:56px;background:var(--dark2);border:1px solid rgba(196,146,42,.25);border-radius:6px;padding:.6rem .4rem;text-align:center;position:relative;z-index:1;flex-shrink:0}
+.tl-badge.on{background:var(--gold);border-color:var(--gold)}
+.tl-range{font-family:'Cinzel',serif;font-size:10.5px;font-weight:600;color:var(--gold2);line-height:1.2}
+.tl-badge.on .tl-range{color:var(--black)}
+.tl-phase{font-family:'Inter',sans-serif;font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:rgba(196,146,42,.45);margin-top:2px}
+.tl-badge.on .tl-phase{color:rgba(0,0,0,.55)}
+.tl-body{flex:1;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:1.25rem 1.5rem}
+.tl-title{font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:#F0EAD6;margin-bottom:.4rem}
+.tl-text{font-family:'Cormorant Garamond',serif;font-size:16px;color:rgba(240,234,214,.62);line-height:1.65}
+.tl-ref{font-family:'Cormorant Garamond',serif;font-size:13px;font-style:italic;color:var(--gold);margin-top:.35rem}
+
+/* MEASURE TABLE */
+.mtable{width:100%;border-collapse:collapse;margin-top:2rem}
+.mtable th{background:var(--dark3);color:var(--gold2);font-family:'Inter',sans-serif;font-size:9.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:10px 14px;text-align:left;border-bottom:1px solid rgba(196,146,42,.25)}
+.mtable td{padding:11px 14px;border-bottom:1px solid rgba(255,255,255,.06);vertical-align:top;font-family:'Cormorant Garamond',serif;font-size:16px;color:rgba(240,234,214,.62);line-height:1.5}
+.mtable tr:last-child td{border-bottom:none}
+.mtable td:first-child{color:#F0EAD6;font-family:'Inter',sans-serif;font-weight:600;font-size:12px}
+.mtable td .sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:rgba(240,234,214,.3);font-weight:400;display:block}
+.mtable td .ref{font-style:italic;color:var(--gold);font-size:14px}
+
+/* SCRIPTURE INDEX */
+.idx{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0 2rem;margin-top:2rem}
+@media(max-width:760px){.idx{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.idx{grid-template-columns:1fr}}
+.idx-hd{grid-column:1/-1;font-family:'Inter',sans-serif;font-size:9px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-top:2rem;padding-bottom:.5rem;border-bottom:1px solid rgba(196,146,42,.3)}
+.idx-hd:first-child{margin-top:0}
+.idx-row{display:flex;justify-content:space-between;align-items:baseline;padding:4px 0;border-bottom:.3px solid var(--bdr2);gap:.75rem}
+.idx-r{font-family:'Cormorant Garamond',serif;font-size:14.5px;font-style:italic;color:var(--gold);white-space:nowrap;flex-shrink:0}
+.idx-t{font-family:'Inter',sans-serif;font-size:10px;color:var(--ink2);text-align:right;line-height:1.5}
+
+/* FOOTER */
+#site-footer{background:var(--black);border-top:1px solid rgba(196,146,42,.15);padding:4rem 2rem 3rem}
+.footer-inner{max-width:var(--wide);margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:3rem}
+@media(max-width:640px){.footer-inner{grid-template-columns:1fr}}
+.foot-brand{font-family:'Cinzel',serif;font-size:12px;letter-spacing:.24em;color:var(--gold2);margin-bottom:.75rem}
+.foot-desc{font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:rgba(240,234,214,.35);line-height:1.7}
+.foot-col-title{font-family:'Inter',sans-serif;font-size:9.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:.85rem}
+.foot-links{list-style:none}
+.foot-links li{margin-bottom:.3rem}
+.foot-links a{font-family:'Cormorant Garamond',serif;font-size:15px;color:rgba(240,234,214,.4);text-decoration:none;transition:color .2s}
+.foot-links a:hover{color:var(--gold2)}
+.foot-bottom{max-width:var(--wide);margin:2.5rem auto 0;padding-top:1.5rem;border-top:1px solid rgba(196,146,42,.1);display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.foot-bottom p{font-family:'Inter',sans-serif;font-size:11px;color:rgba(240,234,214,.2);letter-spacing:.06em}
+.foot-verse{font-family:'Cormorant Garamond',serif;font-size:14px;font-style:italic;color:rgba(196,146,42,.45)}
+
+/* BLOG */
+#page-blog{padding-top:var(--nav-h)}
+.blog-hero{background:var(--dark);padding:60px 2rem 56px;position:relative;overflow:hidden}
+.blog-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold) 30%,var(--gold2) 50%,var(--gold) 70%,transparent)}
+.blog-hero-inner{max-width:var(--wide);margin:0 auto}
+.blog-hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,60px);font-weight:300;color:#F5EDDA;line-height:1.05;margin-bottom:.35rem}
+.blog-hero-sub{font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic;color:rgba(240,234,214,.42)}
+.blog-filters{background:var(--black);border-bottom:1px solid rgba(196,146,42,.12);padding:.75rem 2rem}
+.blog-filters-inner{max-width:var(--wide);margin:0 auto;display:flex;gap:.5rem;flex-wrap:wrap}
+.f-btn{font-family:'Inter',sans-serif;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,234,214,.4);background:transparent;border:1px solid rgba(255,255,255,.1);border-radius:3px;padding:5px 12px;cursor:pointer;transition:all .2s}
+.f-btn:hover,.f-btn.on{color:var(--gold2);border-color:rgba(196,146,42,.4);background:rgba(196,146,42,.08)}
+.blog-grid-wrap{background:var(--off);padding:3rem 2rem 5rem}
+.blog-grid{max-width:var(--wide);margin:0 auto;display:grid;grid-template-columns:2fr 1fr;gap:2rem;align-items:start}
+@media(max-width:860px){.blog-grid{grid-template-columns:1fr}}
+.post-grid{display:flex;flex-direction:column;gap:1.5rem}
+.post-card{background:var(--white);border:1px solid var(--bdr2);border-radius:8px;overflow:hidden;display:grid;grid-template-columns:200px 1fr;transition:transform .22s,border-color .22s}
+@media(max-width:520px){.post-card{grid-template-columns:1fr}}
+.post-card:hover{transform:translateY(-3px);border-color:var(--gold)}
+.post-img .img-ph{border-radius:0;border:none;min-height:100%;height:100%}
+.post-content{padding:1.5rem}
+.post-meta{display:flex;align-items:center;gap:.6rem;margin-bottom:.6rem;flex-wrap:wrap}
+.post-cat{font-family:'Inter',sans-serif;font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);background:var(--gold-bg);border:1px solid rgba(196,146,42,.25);border-radius:2px;padding:2px 8px}
+.post-date{font-family:'Inter',sans-serif;font-size:11px;color:var(--ink3)}
+.post-title{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:500;color:var(--ink);line-height:1.2;margin-bottom:.5rem;text-decoration:none;display:block}
+.post-title:hover{color:var(--gold)}
+.post-excerpt{font-family:'Cormorant Garamond',serif;font-size:15.5px;color:var(--ink2);line-height:1.65;margin-bottom:1rem}
+.post-readmore{font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);text-decoration:none;display:inline-flex;align-items:center;gap:5px;transition:gap .2s}
+.post-readmore:hover{gap:10px}
+.post-featured{background:var(--dark);border:1px solid rgba(196,146,42,.2);border-top:3px solid var(--gold);border-radius:8px;overflow:hidden;margin-bottom:1.5rem}
+.post-featured .img-ph{min-height:260px;border-radius:0}
+.post-featured .post-content{padding:1.75rem}
+.post-featured .post-title{color:#F5EDDA;font-size:26px}
+.post-featured .post-title:hover{color:var(--gold2)}
+.post-featured .post-excerpt{color:rgba(240,234,214,.55)}
+.post-featured .post-readmore{color:var(--gold2)}
+.blog-sidebar{display:flex;flex-direction:column;gap:1.5rem}
+.sidebar-widget{background:var(--white);border:1px solid var(--bdr2);border-radius:8px;overflow:hidden}
+.sw-title{background:var(--dark);padding:.85rem 1.25rem;font-family:'Inter',sans-serif;font-size:9.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold2)}
+.sw-body{padding:1.25rem}
+.cat-list{list-style:none}
+.cat-list li{border-bottom:1px solid var(--bdr2);padding:.6rem 0;display:flex;justify-content:space-between;align-items:center}
+.cat-list li:last-child{border-bottom:none}
+.cat-list a{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--ink2);text-decoration:none;transition:color .18s}
+.cat-list a:hover{color:var(--gold)}
+.cat-count{font-family:'Inter',sans-serif;font-size:10px;color:var(--ink3);background:var(--off);border-radius:20px;padding:2px 8px}
+.recent-list{list-style:none}
+.recent-item{border-bottom:1px solid var(--bdr2);padding:.65rem 0;display:flex;gap:.75rem}
+.recent-item:last-child{border-bottom:none}
+.recent-item-title{font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--ink);line-height:1.35;text-decoration:none;display:block}
+.recent-item-title:hover{color:var(--gold)}
+.recent-item-date{font-family:'Inter',sans-serif;font-size:10px;color:var(--ink3);margin-top:3px}
+.tag-cloud{display:flex;flex-wrap:wrap;gap:.4rem}
+.tag{font-family:'Inter',sans-serif;font-size:10px;font-weight:600;letter-spacing:.1em;color:var(--ink2);background:var(--off);border:1px solid var(--bdr2);border-radius:3px;padding:4px 10px;text-decoration:none;transition:all .18s}
+.tag:hover{background:var(--gold-bg);color:var(--gold);border-color:rgba(196,146,42,.3)}
+.notify-bar{background:var(--dark3);border:1px solid rgba(196,146,42,.2);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:1.25rem 1.5rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.notify-bar p{font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic;color:rgba(240,234,214,.6);flex:1}
+.notify-bar a{font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold2);text-decoration:none;border:1px solid rgba(196,146,42,.4);border-radius:3px;padding:6px 14px;white-space:nowrap;transition:all .2s}
+.notify-bar a:hover{background:var(--gold);color:var(--black)}
+.admin-note{background:var(--dark2);border:1px dashed rgba(196,146,42,.25);border-radius:6px;padding:1.25rem 1.5rem;margin-top:.5rem}
+.admin-note p{font-family:'Cormorant Garamond',serif;font-size:15px;color:rgba(240,234,214,.4);line-height:1.65;font-style:italic}
+.admin-note strong{color:var(--gold);font-family:'Inter',sans-serif;font-size:9.5px;font-style:normal;font-weight:700;letter-spacing:.16em;text-transform:uppercase;display:block;margin-bottom:.4rem}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+<!-- NAV -->
+<nav id="nav" aria-label="Main navigation">
+  <a href="#" class="nav-home" onclick="showPage('main');window.scrollTo(0,0);return false">
+    <svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H5a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
+    CCCC
+  </a>
+  <div class="nav-scroll">
+    <ul class="nav-links" id="navlinks">
+      <li><a href="#executive" onclick="showPage('main')">Summary</a></li>
+      <li><a href="#foundations" onclick="showPage('main')">Foundations</a></li>
+      <li><a href="#theological" onclick="showPage('main')">Theology</a></li>
+      <li><a href="#discipleship" onclick="showPage('main')">Discipleship</a></li>
+      <li><a href="#livelihood" onclick="showPage('main')">Livelihood</a></li>
+      <li><a href="#school" onclick="showPage('main')">School</a></li>
+      <li><a href="#structure" onclick="showPage('main')">Structure</a></li>
+      <li><a href="#milestones" onclick="showPage('main')">Milestones</a></li>
+      <li><a href="#sending" onclick="showPage('main')">Sending</a></li>
+      <li><a href="#scripture-index" onclick="showPage('main')">Index</a></li>
+    </ul>
+  </div>
+  <div class="nav-blog-btn">
+    <a href="#" onclick="showPage('blog');return false">
+      <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      Updates
+    </a>
+  </div>
+</nav>
+
+<!-- MAIN PAGE -->
+<div id="page-main" class="page active">
+
+<!-- COVER -->
+<section id="cover">
+  <div class="cv-grid"></div>
+  <div class="cv-glow"></div>
+  <div class="cv-glow2"></div>
+  <div class="cv-watermark" aria-hidden="true">1,000</div>
+  <div class="cv-badge">Soli Deo Gloria</div>
+  <div class="cv-eye" style="font-size:13px;letter-spacing:.22em">Christ-Centered Community Church</div>
+  <h1 class="cv-title">
+    <strong>Vision 1,000</strong>
+  </h1>
+  <p class="cv-sub">A Biblical, Theological &amp; Organizational Framework</p>
+  <div class="cv-verses">
+    <div class="cv-verse">
+      <p>"The least of you will become a thousand, the smallest a mighty nation. I am the Lord; in its time I will do this swiftly."</p>
+      <cite>Isaiah 60:22</cite>
+    </div>
+    <div class="cv-verse">
+      <p>"And I tell you that you are Peter, and on this rock I will build my church, and the gates of Hades will not overcome it."</p>
+      <cite>Matthew 16:18</cite>
+    </div>
+  </div>
+  <p class="cv-desc">A clarified, stress-tested account of the vision — its foundations, philosophy, livelihood strategy, school vision, and multiplication mandate. Scripture-dense. Written for founding leaders and theological companions.</p>
+  <div class="cv-scroll" onclick="document.getElementById('executive').scrollIntoView({behavior:'smooth'})" aria-hidden="true">
+    <div class="cv-scroll-line"></div>
+    <span>SCROLL</span>
+  </div>
+</section>
+
+<!-- STAT BAND -->
+<div style="background:var(--black);padding:0">
+  <div class="stat-band">
+    <div class="stat-cell"><div class="stat-n">1,000</div><div class="stat-l">Visible Disciples</div></div>
+    <div class="stat-cell"><div class="stat-n">12</div><div class="stat-l">Elders</div></div>
+    <div class="stat-cell"><div class="stat-n">12</div><div class="stat-l">Deacons</div></div>
+    <div class="stat-cell"><div class="stat-n">4</div><div class="stat-l">School Tracks</div></div>
+    <div class="stat-cell"><div class="stat-n">∞</div><div class="stat-l">Multiplication</div></div>
+  </div>
+</div>
+<!-- EXECUTIVE SUMMARY -->
+<section id="executive" class="s s-light">
+  <div class="s-inner reveal">
+    <div class="eyebrow">Executive Summary</div>
+    <h2 class="s-title">The Vision <em>in Full</em></h2>
+    <div class="s-rule"></div>
+    <div class="vision-box">
+      <p>Vision 1,000 is the pursuit of a Christ-centered community of one thousand visible and available disciples whose lives are being transformed by the gospel of Jesus Christ, faithfully cultivating and guarding all that God has entrusted to them, so that Christ may be glorified in them, through them, and beyond them.</p>
+      <cite>THE VISION STATEMENT</cite>
+    </div>
+    <div class="pillars">
+      <div class="pillar"><div class="p-lbl">The Vision</div><div class="p-val">Christ — and His glory revealed through transformed lives</div></div>
+      <div class="pillar"><div class="p-lbl">The Mission</div><div class="p-val">Disciple-making through the Great Commission, compelled by the love of Christ received</div></div>
+      <div class="pillar"><div class="p-lbl">The Framework</div><div class="p-val">Abad &amp; Shamar — faithfully cultivating and guarding all God entrusts, across every domain of life</div></div>
+      <div class="pillar"><div class="p-lbl">The Number</div><div class="p-val">A visible measure and practical boundary — not the goal itself. The goal is Christ.</div></div>
+      <div class="pillar"><div class="p-lbl">The Outcome</div><div class="p-val">A flourishing community bearing witness to God's glory — testimony, not achievement</div></div>
+      <div class="pillar"><div class="p-lbl">The Movement</div><div class="p-val">Leaders raised, disciples sent, communities planted — success measured by faithfulness, not retention</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BIBLICAL FOUNDATIONS -->
+<section id="foundations" class="s s-off">
+  <div class="s-inner reveal">
+    <div class="eyebrow">01 · Biblical Foundations</div>
+    <h2 class="s-title">The Scriptural <em>Architecture</em></h2>
+    <div class="s-rule"></div>
+    <p class="s-lead">Three pillars hold everything. Remove any one and the structure collapses. Together they define what CCCC is, how it operates, and whose it is.</p>
+    <div class="img-grid">
+      <div class="img-ph"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Community Photo</span></div>
+      <div class="img-ph"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Scripture Study</span></div>
+    </div>
+    <div class="blocks">
+      <div class="blk">
+        <div class="blk-num">01</div>
+        <div class="blk-body">
+          <div class="blk-hrow"><h3 class="blk-h">Creation order: Abad &amp; Shamar — fulfilled in Christ</h3><span class="blk-ref">Gen. 2:15 · 2 Cor. 3:18 · Col. 1:10</span></div>
+          <p class="blk-p">God entrusted humanity with the vocation of cultivating and guarding all that He had given, and humanity abandoned it. What Adam failed to keep, Christ came to fulfill — the true and faithful image-bearer who cultivated perfectly and guarded completely, all the way to the cross and through it. Now, by union with Him, those who belong to Christ are being continuously transformed into that same image, from one degree of glory to another. Abad and Shamar is therefore not a command reimposed on disciples from the outside. It is the shape of the life Christ has freed us into.</p>
+        </div>
+      </div>
+      <div class="blk">
+        <div class="blk-num">02</div>
+        <div class="blk-body">
+          <div class="blk-hrow"><h3 class="blk-h">Redemption as re-ordering — the Psalm 107 pattern</h3><span class="blk-ref">Ps. 107:35–38</span></div>
+          <p class="blk-p">Psalm 107 does not open with a program. It opens with a cry — and then with God answering it. The redeemed are gathered from every direction: from hunger and thirst in the desert, from darkness and chains, from affliction and near-death, from the crashing sea. What follows is never self-improvement — it is transformation by mercy. And then in verses 35–38: <em>"He turned the desert into pools of water and the parched ground into flowing springs; there he brought the hungry to live, and they founded a city where they could settle. They sowed fields and planted vineyards that yielded a fruitful harvest; he blessed them, and their numbers greatly increased."</em> This is the vision image for CCCC. A wilderness made fruitful. Hungry people given a city. Fields planted — which means there is work to be done; the redeemed do not sit idle. Harvests yielded — which means God is the one blessing the work for His purposes, and we are not simply thriving on our own terms. Numbers multiplied — not through strategy, but through the overflow of divine mercy. What emerges — order, fruitfulness, a city founded — is not community development. It is doxology: the visible overflow of what God has done in those He has redeemed.</p>
+          <div class="pq"><p>"He turned the desert into pools of water and the parched ground into flowing springs; there he brought the hungry to live, and they founded a city where they could settle."</p><cite>PSALM 107:35–36</cite></div>
+        </div>
+      </div>
+      <div class="blk">
+        <div class="blk-num">03</div>
+        <div class="blk-body">
+          <div class="blk-hrow"><h3 class="blk-h">The church's constitution and commission</h3><span class="blk-ref">Matt. 16:18 · Matt. 28:18–20 · Acts 1:8</span></div>
+          <p class="blk-p">Matthew 16:18 establishes ownership: the church belongs to Christ, and He is its builder. Matthew 28:18–20 establishes operation: because all authority belongs to Him, the community He builds is sent — to go, to baptize, to teach obedience to everything He commanded. Acts 1:8 names the only sufficient power: not organizational capacity or vision clarity, but the Holy Spirit. All framework categories are servants of this commission, never its substitutes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THEOLOGICAL VISION -->
+<section id="theological" class="s s-dark">
+  <div class="s-inner reveal">
+    <div class="eyebrow">02 · Theological Vision</div>
+    <h2 class="s-title">What CCCC Believes It Is <em>Doing</em></h2>
+    <div class="s-rule"></div>
+    <p class="s-lead">Before any program, any structure, any number — CCCC operates from a set of theological convictions. These are not aspirations. They are the load-bearing walls.</p>
+    <div class="blocks">
+      <div class="blk">
+        <div class="blk-num">01</div>
+        <div class="blk-body">
+          <div class="blk-hrow"><h3 class="blk-h">A doxological event, not an organizational achievement</h3><span class="blk-ref">Matt. 16:18 · Rev. 7:9–10 · Col. 1:10 · Heb. 12:2</span></div>
+          <p class="blk-p">When Vision 1,000 is realized, it will only be a testimony and a witness of God's glory. The 1,000 is not a trophy — it is a community of a thousand transformed lives. Not an organizational achievement, but a doxological event: a glimpse, here and now, of the great multitude from every nation that will one day worship together before the throne of God (Rev. 7:9–10). A living preview of the eschatological reality that Christ is building toward — the gates of Hades cannot prevail against it (Matt. 16:18).</p>
+          <p class="blk-p">The 1,000 is a number manifesting the power of the gospel as unstoppable. It places the church firmly on the offensive — not gathered into a defended fortress, but advancing. Every transformed life is a data point in God's case against despair and unbelief. Together, a thousand such lives become an argument impossible to ignore.</p>
+          <p class="blk-p">The goal was never institutional success. The goal was always the glory of God made visible through changed lives — disciples loving one another (John 13:35), abiding in Christ (John 15:4–5), living worthy of the Lord in every good work (Col. 1:10), looking to Jesus the Author and Perfecter of faith (Heb. 12:2). CCCC, if it succeeds, will have nothing to show for itself that is its own. Everything will belong to the one who built it.</p>
+          <div class="pq"><p>"The least of you will become a thousand, the smallest a mighty nation. I am the Lord; in its time I will do this swiftly."</p><cite>ISAIAH 60:22 · The vision's animating promise</cite></div>
+        </div>
+      </div>
+      <div class="blk">
+        <div class="blk-num">02</div>
+        <div class="blk-body">
+          <div class="blk-hrow"><h3 class="blk-h">The conviction behind CCCC's love for one another</h3><span class="blk-ref">John 13:35 · John 15:4–5</span></div>
+          <p class="blk-p">The love that CCCC is called to embody is not a program or a culture initiative — it is the direct fruit of abiding in Christ. Jesus declared in John 15:4–5: <em>"Remain in me, as I also remain in you. No branch can bear fruit by itself; it must remain in the vine. Neither can you bear fruit unless you remain in me… apart from me you can do nothing."</em> This abiding is the root. The love visible to the world is the fruit. And in John 13:35: <em>"By this everyone will know that you are my disciples, if you love one another."</em> CCCC's community life is the natural overflow evidence that its people are truly abiding in Christ. The only sustainable love is abiding love.</p>
+          <div class="pq"><p>"By this everyone will know that you are my disciples, if you love one another."</p><cite>JOHN 13:35</cite></div>
+        </div>
+      </div>
+      <div class="blk">
+        <div class="blk-num">03</div>
+        <div class="blk-body">
+          <div class="blk-hrow"><h3 class="blk-h">Divine initiative and human response</h3><span class="blk-ref">1 Cor. 3:5–7 · Eph. 2:10 · Heb. 11:6</span></div>
+          <div class="two-col" style="margin-top:.75rem">
+            <div class="card"><div class="card-title">Divine Initiative</div><ul><li>The Lord builds the church (Matt. 16:18)</li><li>Christ's love compels (2 Cor. 5:14)</li><li>The Spirit empowers (Acts 1:8)</li><li>Christ perfects and finishes (Heb. 12:2)</li><li>We are His workmanship (Eph. 2:10)</li></ul><div class="card-note">Col. 1:10 · Phil. 3:8</div></div>
+            <div class="card"><div class="card-title">Human Response</div><ul><li>Faith as complete dependence (Heb. 11:6)</li><li>Obedience to His teaching (Matt. 28:20)</li><li>Abad &amp; Shamar as lived freedom (Gen. 2:15)</li><li>Selfless life beyond self (Col. 1:10)</li><li>Joy in trials; steadfastness (James 1:2–4)</li></ul><div class="card-note">1 Cor. 14:1 · Phil. 3:8</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="blk">
+        <div class="blk-num">04</div>
+        <div class="blk-body">
+          <div class="blk-hrow"><h3 class="blk-h">No named founder: a structural theological conviction</h3><span class="blk-ref">1 Cor. 3:5–7 · Heb. 10:24–25</span></div>
+          <p class="blk-p">The anonymity of founding leaders is not humility performed — it is a structural theological stance against personality-driven church culture. CCCC's founders are identified not by name but by disposition: those who loved the Lord, kept meeting together, and agreed in humility that this vision was planted by God — not conceived by any one of them.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DISCIPLESHIP -->
+<section id="discipleship" class="s s-parch">
+  <div class="s-inner reveal">
+    <div class="eyebrow">03 · Discipleship Philosophy</div>
+    <h2 class="s-title">How CCCC <em>Forms People</em></h2>
+    <div class="s-rule"></div>
+    <p class="s-lead">Formation is the irreducible work. Everything else — programs, numbers, structures — is scaffolding. The building is people becoming like Christ.</p>
+    <div class="blocks">
+      <div class="blk">
+        <div class="blk-num">01</div>
+        <div class="blk-body">
+          <div class="blk-hrow"><h3 class="blk-h">Visible and available disciples</h3><span class="blk-ref">Matt. 28:19–20 · Heb. 10:24–25</span></div>
+          <p class="blk-p">Vision 1,000 does not count attendees or spectators. It seeks <em>visible and available</em> disciples — those who deliberately place themselves within the ordinary means through which God works: His Word, His people, prayer, fellowship, teaching, correction, encouragement, and service. The church's responsibility is to faithfully create the conditions where people may continually encounter Christ.</p>
+        </div>
+      </div>
+      <div class="blk">
+        <div class="blk-num">02</div>
+        <div class="blk-body">
+          <div class="blk-hrow"><h3 class="blk-h">The overflow model</h3><span class="blk-ref">Col. 3:16 · John 21:15–17 · John 13:35</span></div>
+          <p class="blk-p">Discipleship flows from the inside out: personal devotion to Jesus overflows into community life, which overflows into the world. The love that marks CCCC is not manufactured warmth — it is the overflow of abiding in Christ (John 15:4–5), made visible in the way members genuinely care for one another, and ultimately unmistakable to those outside (John 13:35).</p>
+        </div>
+      </div>
+      <div class="blk">
+        <div class="blk-num">03</div>
+        <div class="blk-body">
+          <div class="blk-hrow"><h3 class="blk-h">Two tracks: spiritual and practical</h3><span class="blk-ref">Eph. 4:28 · Prov. 3:5–6 · 1 Tim. 4:7</span></div>
+          <p class="blk-p">Elders oversee spiritual formation. Deacons oversee practical formation — answering the "how" of Ephesians 4:28, pushing the wisdom of Proverbs 22:29 and 14:23 (skillful, profitable work that stands before those in need), with the conviction of Ecclesiastes 9:10 (whatever your hand finds to do, do it with all your might). The two tracks are not parallel programs but a single integrated life: practical wisdom is never severed from its theological root, and theological conviction is always tested in its practical expression.</p>
+        </div>
+      </div>
+      <div class="blk">
+        <div class="blk-num">04</div>
+        <div class="blk-body">
+          <div class="blk-hrow"><h3 class="blk-h">The 1,000 as discipleship ecology — and doxological boundary</h3><span class="blk-ref">Ex. 18:21–22 · Prov. 27:17 · Rev. 7:9–10</span></div>
+          <p class="blk-p">The limit of 1,000 creates manageable shepherding — every member known, every soul accountable, every gift locatable. The 1,000 is not a membership ceiling; it is a discipleship boundary — a safeguard against ungovernable scale where genuine formation becomes impossible. But the boundary is also theological: large enough to be a visible, compelling witness and small enough to remain a real community where names are known. At the threshold, the vision does not end. It multiplies. The ceiling becomes a womb.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- LIVELIHOOD -->
+<section id="livelihood" class="s s-black">
+  <div class="s-inner wide reveal">
+    <div class="eyebrow">04 · Sustainable Livelihood Programs</div>
+    <h2 class="s-title">Answering the <em>How</em> of Ephesians 4:28</h2>
+    <div class="s-rule"></div>
+    <div class="eph-box">
+      <div class="eph-ref">Ephesians 4:28 · Proverbs 22:29 · Proverbs 14:23 · Ecclesiastes 9:10 — The Organizing Principle</div>
+      <p>"Anyone who has been stealing must steal no more, but must work, doing something useful with their own hands, that they may have something to share with those in need."</p>
+      <div class="eph-expl">A complete theology of economic transformation in three movements: <strong style="color:var(--gold2)">stop</strong> (repentance made possible only by the finished work of Christ), <strong style="color:var(--gold2)">work</strong> (diligent, skillful labor as worship — "Do you see someone skilled in their work? They will serve before kings," Prov. 22:29), and <strong style="color:var(--gold2)">share</strong> (giving out of the overflow of Christ's love, not moral duty alone). Two further anchors shape the posture: <em>"All hard work brings a profit, but mere talk leads only to poverty"</em> (Prov. 14:23), and <em>"Whatever your hand finds to do, do it with all your might"</em> (Ecc. 9:10). These three movements are not a morality program. Without the finished work of Christ, Stop produces only guilt, Work produces only pride, and Share produces only performance. It is Christ's atoning work that enables true repentance, His resurrection that empowers reverent labor, and the overflow of His love — not obligation — that makes genuine sharing possible.</div>
+      <div class="eph-cols">
+        <div class="eph-col"><h4>Stop</h4><p>True repentance — not behavior management, but the response of a heart encountered by Christ. Made possible only by His finished work on the cross. Biblical accountability through discipleship groups and elder counsel. <em style="color:var(--gold);display:block;margin-top:.35rem">2 Cor. 5:17 · Rom. 6:1–4</em></p></div>
+        <div class="eph-col"><h4>Work</h4><p>Dignified, skillful labor as worship — <em>"skilled in their work… will serve before kings"</em> (Prov. 22:29). Not hustle for survival but stewardship before God. Every program develops capacity. Abad in action. <em style="color:var(--gold);display:block;margin-top:.35rem">Prov. 22:29 · Ecc. 9:10 · Col. 3:23</em></p></div>
+        <div class="eph-col"><h4>Share</h4><p>Giving not from surplus alone but from the overflow of Christ's love received — <em>"we love because He first loved us"</em> (1 John 4:19). Those equipped become equippers. Those employed become employers. Shamar as doxology, not duty. <em style="color:var(--gold);display:block;margin-top:.35rem">1 John 4:19 · 2 Cor. 9:7</em></p></div>
+      </div>
+    </div>
+    <div class="prog-grid">
+      <div class="prog-card">
+        <div class="prog-icon">✂</div>
+        <div class="prog-name">Skills &amp; Vocational Training</div>
+        <div class="prog-verse">Prov. 22:29 · Ex. 35:31–32</div>
+        <div class="prog-desc">Sewing, carpentry, welding, electronics, baking — taught within the community. Excellence in craft glorifies God. Bezalel was filled with the Spirit for skilled work; so may every member be.</div>
+        <span class="prog-tag">Abad: cultivate skill</span>
+      </div>
+      <div class="prog-card">
+        <div class="prog-icon">⚘</div>
+        <div class="prog-name">Agricultural &amp; Urban Gardens</div>
+        <div class="prog-verse">Ps. 107:37 · Gen. 2:15</div>
+        <div class="prog-desc">Community plots, container gardens, collective farming. Food security for member families. Surplus distributed to widows and the poor. <em style="color:var(--gold);display:block;margin-top:.35rem">"Whatever your hand finds to do, do it with all your might." — Ecc. 9:10</em></div>
+        <span class="prog-tag">Abad &amp; Shamar: tend the land</span>
+      </div>
+      <div class="prog-card">
+        <div class="prog-icon">⊙</div>
+        <div class="prog-name">Microenterprise &amp; Livelihood Capital</div>
+        <div class="prog-verse">Eph. 4:28 · Prov. 31:16</div>
+        <div class="prog-desc">Seed capital, community loan pools, and business mentoring for members beginning micro-businesses. Capital given is always paired with accountability. <em style="color:var(--gold);display:block;margin-top:.35rem">"All hard work brings a profit." — Prov. 14:23</em></div>
+        <span class="prog-tag">Shamar: guard resources</span>
+      </div>
+      <div class="prog-card">
+        <div class="prog-icon">⌨</div>
+        <div class="prog-name">Digital Work &amp; Remote Pathways</div>
+        <div class="prog-verse">Col. 3:23 · Prov. 13:4</div>
+        <div class="prog-desc">Equipping members for freelance writing, virtual assistance, graphic design, and other remote disciplines — generating income without geographic displacement of the family.</div>
+        <span class="prog-tag">Abad: work with diligence</span>
+      </div>
+      <div class="prog-card">
+        <div class="prog-icon">❤</div>
+        <div class="prog-name">Care for the Vulnerable</div>
+        <div class="prog-verse">Gal. 2:10 · Matt. 25:40 · Acts 6:1–7</div>
+        <div class="prog-desc">Deacons coordinate care for widows, the elderly, the sick, and families in acute crisis — meals, medicine, transportation, and financial support from community funds. Shamar made concrete.</div>
+        <span class="prog-tag">Shamar: guard the vulnerable</span>
+      </div>
+      <div class="prog-card">
+        <div class="prog-icon">↺</div>
+        <div class="prog-name">The Multiplier Principle</div>
+        <div class="prog-verse">2 Cor. 9:10 · 2 Tim. 2:2</div>
+        <div class="prog-desc">Every program is designed with replication in mind. Those who receive training eventually train others. The goal is an ecosystem of dignified work and mutual care — sustained by Christ's people, not by external charity.</div>
+        <span class="prog-tag">Abad + Shamar: cultivate &amp; pass on</span>
+      </div>
+    </div>
+    <div class="pq"><p>The Deacons do not run programs — they cultivate an ecology of dignified work and generous care, shaped by the Word, accountable to the community, measured by whether members grow toward Christ-sustaining fruitfulness rather than structural dependency.</p><cite>CCCC ORGANIZATIONAL PRINCIPLE · Eph. 4:28 · Acts 6:3</cite></div>
+  </div>
+</section>
+
+<!-- SCHOOL VISION -->
+<section id="school" class="s s-off">
+  <div class="s-inner wide reveal">
+    <div class="eyebrow">05 · School Vision</div>
+    <h2 class="s-title">Forming <em>Minds</em>, Equipping <em>Leaders</em>, Sending <em>the Ready</em></h2>
+    <div class="s-rule"></div>
+    <p class="s-lead">The CCCC School Vision holds academic, theological, and leadership formation together as one integrated work — the church passing the faith, in its fullness, to the next generation.</p>
+    <div class="pq"><p>"These are not to be hidden from their children; we will tell the next generation the praiseworthy deeds of the Lord, his power, and the wonders he has done."</p><cite>PSALM 78:4</cite></div>
+    <div class="img-grid-3" style="margin-bottom:1.5rem">
+      <div class="img-ph" style="min-height:240px"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>School Community</span></div>
+      <div class="img-ph img-ph-sm"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Bible Class</span></div>
+      <div class="img-ph img-ph-sm"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Elder Training</span></div>
+    </div>
+    <div class="tracks">
+      <div class="track">
+        <div class="track-badge">Track A</div>
+        <div class="track-name">Formal K–12 &amp; Alternative Learning Center</div>
+        <div class="track-desc">Christ-centered basic education integrating academic excellence with Scripture, character formation, and biblical worldview. Where formal K–12 is beyond capacity, an ALC provides a recognized pathway.</div>
+        <ul class="track-list"><li>Core academics within a biblical framework</li><li>Character and virtue woven into curriculum</li><li>Accessible to members' families first, then community</li><li>ALC pathway for out-of-school youth and adults</li><li>Teachers drawn from qualified CCCC members</li></ul>
+        <span class="track-ref">Prov. 22:6 · Deut. 6:6–7 · Ps. 78:4</span>
+      </div>
+      <div class="track">
+        <div class="track-badge">Track B</div>
+        <div class="track-name">Theological &amp; Biblical Training School</div>
+        <div class="track-desc">Non-formal theological education for all members — grounding the community in Scripture, sound doctrine, church history, and hermeneutics. The common inheritance of every disciple, not reserved for clergy.</div>
+        <ul class="track-list"><li>Systematic Bible survey across both Testaments</li><li>Hermeneutics: how to handle Scripture faithfully</li><li>Theology of Abad &amp; Shamar across six life domains</li><li>Christological foundations of Vision 1,000</li><li>Church history and God's faithfulness</li><li>Apologetics for the surrounding community</li></ul>
+        <span class="track-ref">2 Tim. 2:15 · Titus 1:9 · Heb. 5:12–14</span>
+      </div>
+      <div class="track">
+        <div class="track-badge">Track C</div>
+        <div class="track-name">Elder Formation &amp; Leadership Equipping</div>
+        <div class="track-desc">A formation crucible for Elders and emerging leaders. Character precedes role. Those who complete this track are not graduates — they are men and women proven by time, tested by trial, trusted by the community.</div>
+        <ul class="track-list"><li>1 Timothy 3 and Titus 1 character pathway</li><li>Preaching, teaching, and pastoral care practicum</li><li>Biblical counseling principles</li><li>Conflict resolution and accountability</li><li>Mentoring by senior Elders — iron sharpens iron</li></ul>
+        <span class="track-ref">1 Tim. 3:1–7 · Titus 1:5–9 · Prov. 27:17</span>
+      </div>
+      <div class="track">
+        <div class="track-badge">Track D</div>
+        <div class="track-name">Sending School — Pre-Deployment Formation</div>
+        <div class="track-desc">Activates as the community approaches its multiplication threshold. Prepares leaders and families for planting a new community — missiology, pioneer hardship, and the theology of sending.</div>
+        <ul class="track-list"><li>Theology of sending: biblical missiology (Acts 13)</li><li>Pioneer community formation principles</li><li>Cultural intelligence and contextual ministry</li><li>Spiritual warfare and resilience in isolation</li><li>Accountability between sending and sent communities</li></ul>
+        <span class="track-ref">Acts 13:1–3 · Matt. 28:19 · 2 Tim. 2:2 · Isa. 60:22</span>
+      </div>
+    </div>
+    <div style="border:1px solid var(--bdr);border-left:4px solid var(--gold);border-radius:0 8px 8px 0;padding:1.75rem 2rem;margin-top:1rem;background:var(--white)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:.5rem;margin-bottom:.75rem">
+        <h3 style="font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:var(--ink)">The integration principle: one school, four gates</h3>
+        <span class="blk-ref">Eph. 4:11–13 · 2 Tim. 3:16–17</span>
+      </div>
+      <p class="blk-p" style="color:var(--ink2)">A child formed in Track A enters Track B as a young adult. A theologically formed member is identified for Track C. A proven elder enters Track D when the sending season arrives. The school is not a department of the church — it is the church's generation-spanning work of equipping every member, until the whole body reaches <em>"the whole measure of the fullness of Christ"</em> (Eph. 4:13).</p>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:14px;font-style:italic;color:var(--ink3);margin-top:.75rem">Track B begins first. Tracks A, C, and D follow in sequence as the community reaches capacity and spiritual maturity to sustain them.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STRUCTURE -->
+<section id="structure" class="s s-light">
+  <div class="s-inner reveal">
+    <div class="eyebrow">06 · Organizational Structure</div>
+    <h2 class="s-title">The <em>Architecture</em> of the Vision</h2>
+    <div class="s-rule"></div>
+    <p class="s-lead">Every structural choice CCCC makes encodes a theological conviction — about power, about people, about who the church ultimately belongs to.</p>
+    <div class="org">
+      <div class="org-row"><div class="org-node top"><div class="on-t">Facilitating Pastor</div><div class="on-s">Unifies Elders &amp; Deacons. Fulltime. Cycles to Elder/Deacon role after set years. Sabbatical provision allowed.</div></div></div>
+      <div class="org-line"></div>
+      <div class="org-row" style="margin-bottom:0"><div class="org-hbar"></div></div>
+      <div class="org-line" style="background:var(--bdr);margin-top:-1px"></div>
+      <div class="org-row">
+        <div class="org-node"><div class="on-t">12 Elders</div><div class="on-s">Ministers of the Word. Prayer, teaching, shepherding, counsel. Ideally fulltime. Spiritual oversight.</div></div>
+        <div class="org-node"><div class="on-t">12 Deacons</div><div class="on-s">Servants of the people. Max 4 fulltime. Practical needs, livelihood programs, community care.</div></div>
+      </div>
+      <div class="org-line" style="background:var(--bdr)"></div>
+      <div class="org-row"><div class="org-node" style="max-width:400px"><div class="on-t">Members — Vision 1,000</div><div class="on-s">Ages 21–60 counted. Those 65+ are honored beneficiaries and active teachers of the next generation (Titus 2:2–5).</div></div></div>
+    </div>
+    <div class="two-col" style="margin-top:2rem">
+      <div style="border:1px solid var(--bdr2);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:1.5rem">
+        <div class="blk-hrow"><h3 class="blk-h">Anti-institutionalization mechanisms</h3><span class="blk-ref">Mark 10:42–45 · 1 Pet. 5:3</span></div>
+        <p class="blk-p">The Pastor's rotation prevents permanent top authority. Anonymous founding prevents personality cults. The 1,000 ceiling prevents ungovernable scale. Each is a structural expression of the conviction that no leader lords it over the flock — built in, not merely aspirational.</p>
+      </div>
+      <div style="border:1px solid var(--bdr2);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:1.5rem">
+        <div class="blk-hrow"><h3 class="blk-h">Divided responsibilities</h3><span class="blk-ref">1 Cor. 3:6–7</span></div>
+        <p class="blk-p">The church remains responsible for faithfulness. God remains responsible for transformation. This theological division of labor prevents both passivity and pride. CCCC plants and waters. The increase belongs to God alone.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- MILESTONES -->
+<section id="milestones" class="s s-dark">
+  <div class="s-inner reveal">
+    <div class="eyebrow">07 · Growth Milestones</div>
+    <h2 class="s-title">Growth <em>Phases</em> &amp; Leadership Dynamics</h2>
+    <div class="s-rule"></div>
+    <p style="font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;color:rgba(240,234,214,.4);margin-bottom:2.5rem">Fulltime eldership thresholds are not yet fixed. Each phase requires its own discernment. <em style="color:var(--gold)">1 Tim. 5:17–18 · Acts 14:23</em></p>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-badge"><div class="tl-range">1–12</div><div class="tl-phase">Seed</div></div>
+        <div class="tl-body"><div class="tl-title">Vision casters and first responders</div><div class="tl-text">House church. No formal structure — all founding leaders by disposition. Vision cast, received, and prayed over. The Spirit confirms before structure forms.</div><div class="tl-ref">Matt. 18:20 · Heb. 10:24–25</div></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-badge"><div class="tl-range">13–40</div><div class="tl-phase">Roots</div></div>
+        <div class="tl-body"><div class="tl-title">First elders and deacons identified</div><div class="tl-text">Informal but intentional. Elders bivocational. 1–2 Deacons serving practically. Discipleship rhythms established. Character before title.</div><div class="tl-ref">Acts 14:23 · Titus 1:5</div></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-badge on"><div class="tl-range">41–100</div><div class="tl-phase">Early Growth</div></div>
+        <div class="tl-body"><div class="tl-title">Structure takes shape; first fulltime role considered</div><div class="tl-text">Elders formally recognized. First fulltime pastoral role becomes pastorally warranted and financially feasible. Deacon teams forming. Rented space secured. Financial accountability established — treasurer and internal auditor. The community begins to feel like a church, not just a gathering.</div><div class="tl-ref">1 Tim. 5:17–18 · Titus 1:5 · Acts 6:1–7</div></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-badge"><div class="tl-range">101–200</div><div class="tl-phase">Established Growth</div></div>
+        <div class="tl-body"><div class="tl-title">Theological formation begins; livelihood programs take root</div><div class="tl-text">Theological training (Track B) launches in earnest. Deacon-led livelihood programs begin. Second fulltime Elder role assessed. The community starts to be shaped by a shared theological vocabulary. <em style="color:var(--gold)">"Whatever your hand finds to do, do it with all your might." (Ecc. 9:10)</em></div><div class="tl-ref">Eph. 4:11–13 · 2 Tim. 2:15 · Heb. 5:12–14</div></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-badge"><div class="tl-range">201–600</div><div class="tl-phase">Maturity</div></div>
+        <div class="tl-body"><div class="tl-title">Full elder team; community programs and school vision launch</div><div class="tl-text">Multiple fulltime Elders. Livelihood programs sustainable. School vision enters prayer and planning — K–12 or ALC feasibility assessed, Elder formation track activated. First multiplication conversations begin.</div><div class="tl-ref">Eph. 4:11–13 · Ps. 107:35–38</div></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-badge"><div class="tl-range">601–1,000</div><div class="tl-phase">Sending</div></div>
+        <div class="tl-body"><div class="tl-title">Multiplication leaders identified; Sending School activated</div><div class="tl-text">Approaching the ceiling. Leaders prepared and sent through the Sending School (Track D). The community that gathered now scatters to gather others. Sending is not pruning — it is the vision fulfilling its own deepest logic. The smallest shall become a thousand.</div><div class="tl-ref">Acts 13:1–3 · Matt. 28:19 · Isa. 60:22</div></div>
+      </div>
+    </div>
+    <div style="margin-top:3rem">
+      <div class="eyebrow" style="margin-bottom:1rem">What CCCC Measures — and Why</div>
+      <div style="overflow-x:auto">
+        <table class="mtable">
+          <thead><tr><th style="width:22%">Category</th><th style="width:50%">Indicators</th><th style="width:28%">Basis</th></tr></thead>
+          <tbody>
+            <tr><td>Membership<span class="sub">Active, ages 21–60</span></td><td>Progress toward 1,000; threshold for multiplication decisions</td><td><span class="ref">Josh. 1:7–9</span></td></tr>
+            <tr><td>Discipleship depth<span class="sub">Spiritual formation</span></td><td>Discipleship groups; Bible study; baptisms; theological school enrollment</td><td><span class="ref">Matt. 28:19–20 · Col. 3:16</span></td></tr>
+            <tr><td>Community overflow<span class="sub">Practical care</span></td><td>Families served; vocational trainees; widows/elderly supported; livelihood graduates</td><td><span class="ref">Gal. 2:10 · Matt. 25:40</span></td></tr>
+            <tr><td>Leadership pipeline<span class="sub">Multiplication readiness</span></td><td>Elders-in-formation; Deacons active; sent-out leaders; Sending School graduates</td><td><span class="ref">2 Tim. 2:2 · Acts 13:1–3</span></td></tr>
+            <tr><td>Financial stewardship<span class="sub">Accountability</span></td><td>Treasurer &amp; auditor reports; Elder support sustainability; livelihood self-sufficiency index</td><td><span class="ref">2 Cor. 9:7 · 1 Tim. 5:17–18</span></td></tr>
+            <tr><td>Steadfastness<span class="sub">Character under pressure</span></td><td>Trial testimonies; retained faith under difficulty; abiding love visible to outsiders</td><td><span class="ref">James 1:2–4 · John 13:35</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:rgba(240,234,214,.32);margin-top:1rem;line-height:1.6">The church remains responsible for faithfulness. God remains responsible for transformation. <em style="color:var(--gold)">1 Cor. 3:6–7</em></p>
+    </div>
+  </div>
+</section>
+
+<!-- SENDING -->
+<section id="sending" class="s s-light">
+  <div class="s-inner reveal">
+    <div class="eyebrow">08 · Multiplication Strategy</div>
+    <h2 class="s-title">Sending as <em>Love</em>, Not Loss</h2>
+    <div class="s-rule"></div>
+    <p class="s-lead">The 1,000 is not a wall. It is a womb. When the community approaches its limit, it does not contract — it reproduces.</p>
+    <div class="img-ph" style="margin-bottom:2rem;min-height:180px"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg><span>Sending Moment / Community Photo</span></div>
+    <div class="blocks">
+      <div class="blk">
+        <div class="blk-num">01</div>
+        <div class="blk-body">
+          <div class="blk-hrow"><h3 class="blk-h">The logic of the limit</h3><span class="blk-ref">Acts 13:1–3 · Isa. 60:22</span></div>
+          <p class="blk-p">Leaders formed within the Vision 1,000 ecology are identified, affirmed, and commissioned — exactly as the church at Antioch sent Paul and Barnabas. "The least of you will become a thousand, the smallest a mighty nation." Isaiah 60:22 is not merely a cover verse — it is the eschatological logic beneath the multiplication mandate.</p>
+        </div>
+      </div>
+      <div class="blk">
+        <div class="blk-num">02</div>
+        <div class="blk-body">
+          <div class="blk-hrow"><h3 class="blk-h">Full independence with open hands</h3><span class="blk-ref">Gal. 2:9–10 · Phil. 1:3–5 · Rom. 14:5</span></div>
+          <p class="blk-p">Sent-out communities are fully independent — no structural authority retained by CCCC over them. They may follow the Vision 1,000 pattern or discern their own form under the Spirit's leading; both are held loosely. This is not indifference — it is theological conviction. The Spirit works variously (1 Cor. 12:4–6), and a tested pattern is a gift offered, never a law enforced.</p>
+          <div style="border:1px solid rgba(196,146,42,.2);border-left:3px solid var(--gold);border-radius:0 6px 6px 0;padding:1.25rem 1.5rem;margin-top:1.25rem;background:rgba(196,146,42,.04)">
+            <div style="font-family:'Inter',sans-serif;font-size:9.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold2);margin-bottom:.6rem">Preserved Tension: Working Structure vs. Spirit-Led Freedom</div>
+            <p class="blk-p">Scripture does not prescribe a single ecclesial form. CCCC holds its own pattern as a gift it received — not a law it imposes on those it sends. Sent communities may adapt or depart from the Vision 1,000 model. This tension between a tested working structure and the Spirit's freedom operating differently in different people and places is left deliberately unresolved. It is not a weakness in the framework — it is faithfulness to what Scripture itself does not settle. What must never be compromised is the foundation: Christ and Him crucified. What must never be corrupted is the motive: love for Christ and for the people He purchased with His blood. <em style="color:var(--gold2)">Rom. 14:5 · 1 Cor. 12:4–6 · Gal. 5:1</em></p>
+            <p class="blk-p" style="margin-top:.85rem">Support that demands compliance is not support. Structure that cannot release is not sending — it is franchising. And a church that sends only to extend its own influence has confused the kingdom of God with its own kingdom.</p>
+          </div>
+        </div>
+      </div>
+      <div class="blk">
+        <div class="blk-num">03</div>
+        <div class="blk-body">
+          <div class="blk-hrow"><h3 class="blk-h">What carries forward — and what it is built on</h3><span class="blk-ref">2 Tim. 2:2 · Col. 2:6–7 · 1 Cor. 13:1–3</span></div>
+          <p class="blk-p">What CCCC exports is not a model but people — men and women rooted in Christ, trained in Abad and Shamar, marked by the Great Commission. But the relationship that continues between a sending community and those it has sent must be examined carefully as to what it is built on.</p>
+          <p class="blk-p">It is not built on mutual benefit — as though the connection persists only while it is useful to both parties. It is not built on civil peace — the desire to avoid friction or maintain comfortable association. It is not built on shared comfort — the warmth of familiar faces and shared history. All of these things may be present, and none of them are wrong. But none of them are the foundation.</p>
+          <p class="blk-p">The only foundation that outlasts every organizational structure, every geographical distance, every difference in form and method, is the love of Christ — received, not generated. <em>"We love because He first loved us"</em> (1 John 4:19). What was built together was built by His grace. What continues is sustained by His love. What is sent is sent in His name. If that foundation is removed, the relationship becomes a network. And a network, however useful, is not the Body of Christ.</p>
+          <div class="pq"><p>"And over all these virtues put on love, which binds them all together in perfect unity."</p><cite>COLOSSIANS 3:14 · The only bond that holds what is sent together with what sent it</cite></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCRIPTURE INDEX -->
+<section id="scripture-index" class="s s-parch">
+  <div class="s-inner wide reveal">
+    <div class="eyebrow">09 · Scripture Index</div>
+    <h2 class="s-title">All <em>References</em> by Category</h2>
+    <div class="s-rule"></div>
+    <div class="idx">
+      <div class="idx-hd">Biblical Foundations</div>
+      <div class="idx-row"><span class="idx-r">Gen. 2:15</span><span class="idx-t">Abad &amp; Shamar — creation-order vocation</span></div>
+      <div class="idx-row"><span class="idx-r">Ps. 78:4</span><span class="idx-t">Wonders told to the next generation</span></div>
+      <div class="idx-row"><span class="idx-r">Ps. 107:35–38</span><span class="idx-t">Desert made fruitful; city founded; numbers multiplied</span></div>
+      <div class="idx-row"><span class="idx-r">Prov. 14:23</span><span class="idx-t">All hard work brings profit; talk leads to poverty</span></div>
+      <div class="idx-row"><span class="idx-r">Ecc. 9:10</span><span class="idx-t">Whatever your hand finds — do it with all your might</span></div>
+      <div class="idx-row"><span class="idx-r">Isa. 60:22</span><span class="idx-t">The least shall become a thousand</span></div>
+      <div class="idx-row"><span class="idx-r">Matt. 16:18</span><span class="idx-t">Christ builds the church; gates of Hades cannot prevail</span></div>
+      <div class="idx-row"><span class="idx-r">Matt. 28:18–20</span><span class="idx-t">Great Commission — CCCC charter</span></div>
+      <div class="idx-row"><span class="idx-r">Acts 1:8</span><span class="idx-t">Spirit as the only sufficient power</span></div>
+      <div class="idx-row"><span class="idx-r">Rev. 7:9–10</span><span class="idx-t">Eschatological multitude; vision image</span></div>
+      <div class="idx-hd">Theological Vision</div>
+      <div class="idx-row"><span class="idx-r">John 13:35</span><span class="idx-t">Recognizable discipleship — love as evidence</span></div>
+      <div class="idx-row"><span class="idx-r">John 15:4–5</span><span class="idx-t">Abiding in Christ — the root of all fruit</span></div>
+      <div class="idx-row"><span class="idx-r">2 Cor. 3:18</span><span class="idx-t">Transformed into His image, glory to glory</span></div>
+      <div class="idx-row"><span class="idx-r">2 Cor. 5:14</span><span class="idx-t">The love of Christ compels us</span></div>
+      <div class="idx-row"><span class="idx-r">Col. 1:10</span><span class="idx-t">Life worthy of the Lord</span></div>
+      <div class="idx-row"><span class="idx-r">Eph. 2:10</span><span class="idx-t">Created for good works in Christ</span></div>
+      <div class="idx-row"><span class="idx-r">Heb. 11:6</span><span class="idx-t">Faith as complete dependence</span></div>
+      <div class="idx-row"><span class="idx-r">Heb. 12:2</span><span class="idx-t">Christ the perfecter and finisher</span></div>
+      <div class="idx-row"><span class="idx-r">1 Cor. 3:5–7</span><span class="idx-t">Servants only; God gives growth</span></div>
+      <div class="idx-row"><span class="idx-r">1 John 4:19</span><span class="idx-t">We love because He first loved us</span></div>
+      <div class="idx-hd">Discipleship &amp; Formation</div>
+      <div class="idx-row"><span class="idx-r">John 21:15–17</span><span class="idx-t">Feed my sheep; love as discipleship root</span></div>
+      <div class="idx-row"><span class="idx-r">Col. 3:16</span><span class="idx-t">Word dwelling richly; mutual teaching</span></div>
+      <div class="idx-row"><span class="idx-r">Prov. 27:17</span><span class="idx-t">Iron sharpens iron</span></div>
+      <div class="idx-row"><span class="idx-r">1 Tim. 4:7</span><span class="idx-t">Train in godliness</span></div>
+      <div class="idx-row"><span class="idx-r">Prov. 3:5–6</span><span class="idx-t">Practical wisdom; trust in the Lord</span></div>
+      <div class="idx-row"><span class="idx-r">James 1:2–4</span><span class="idx-t">Joy in trials; steadfastness</span></div>
+      <div class="idx-row"><span class="idx-r">Heb. 10:24–25</span><span class="idx-t">Keep meeting together</span></div>
+      <div class="idx-row"><span class="idx-r">2 Tim. 3:16–17</span><span class="idx-t">Scripture equipping for every good work</span></div>
+      <div class="idx-row"><span class="idx-r">Heb. 5:12–14</span><span class="idx-t">Maturity through trained discernment</span></div>
+      <div class="idx-hd">Leadership &amp; Structure</div>
+      <div class="idx-row"><span class="idx-r">Acts 6:1–7</span><span class="idx-t">Deacons; serving practical needs</span></div>
+      <div class="idx-row"><span class="idx-r">1 Tim. 3:1–7</span><span class="idx-t">Elder character qualifications</span></div>
+      <div class="idx-row"><span class="idx-r">1 Tim. 5:17–18</span><span class="idx-t">Double honor; financial support for elders</span></div>
+      <div class="idx-row"><span class="idx-r">Titus 1:5–9</span><span class="idx-t">Appointing elders; character requirements</span></div>
+      <div class="idx-row"><span class="idx-r">Titus 2:2–5</span><span class="idx-t">Older members as teachers and models</span></div>
+      <div class="idx-row"><span class="idx-r">Acts 14:23</span><span class="idx-t">Elders appointed in each church</span></div>
+      <div class="idx-row"><span class="idx-r">Ex. 18:21–22</span><span class="idx-t">Jethro's structure; manageable shepherding</span></div>
+      <div class="idx-row"><span class="idx-r">Mark 10:42–45</span><span class="idx-t">Servant leadership; not lording over</span></div>
+      <div class="idx-row"><span class="idx-r">1 Pet. 5:3</span><span class="idx-t">Not domineering; examples to the flock</span></div>
+      <div class="idx-hd">Livelihood &amp; Practical Care</div>
+      <div class="idx-row"><span class="idx-r">Eph. 4:28</span><span class="idx-t">Stop / Work / Share — three movements</span></div>
+      <div class="idx-row"><span class="idx-r">Prov. 14:23</span><span class="idx-t">All hard work brings profit — no idle talk</span></div>
+      <div class="idx-row"><span class="idx-r">Ecc. 9:10</span><span class="idx-t">Do it with all your might — urgency of faithful effort</span></div>
+      <div class="idx-row"><span class="idx-r">Prov. 22:29</span><span class="idx-t">Skillful work; excellence before kings</span></div>
+      <div class="idx-row"><span class="idx-r">Ex. 35:31–32</span><span class="idx-t">Bezalel filled with Spirit for skilled work</span></div>
+      <div class="idx-row"><span class="idx-r">Col. 3:23</span><span class="idx-t">Work as unto the Lord</span></div>
+      <div class="idx-row"><span class="idx-r">Prov. 13:4</span><span class="idx-t">Diligent soul richly supplied</span></div>
+      <div class="idx-row"><span class="idx-r">Gal. 2:10</span><span class="idx-t">Remember the poor</span></div>
+      <div class="idx-row"><span class="idx-r">Matt. 25:40</span><span class="idx-t">Serving the least is serving Christ</span></div>
+      <div class="idx-row"><span class="idx-r">2 Cor. 9:10</span><span class="idx-t">He who supplies seed to the sower</span></div>
+      <div class="idx-hd">School &amp; Formation</div>
+      <div class="idx-row"><span class="idx-r">Deut. 6:6–7</span><span class="idx-t">Teaching children in every moment</span></div>
+      <div class="idx-row"><span class="idx-r">Prov. 22:6</span><span class="idx-t">Train a child in the way they should go</span></div>
+      <div class="idx-row"><span class="idx-r">2 Tim. 2:15</span><span class="idx-t">Rightly handling the word of truth</span></div>
+      <div class="idx-row"><span class="idx-r">Titus 1:9</span><span class="idx-t">Holding firm to sound doctrine</span></div>
+      <div class="idx-row"><span class="idx-r">Eph. 4:11–13</span><span class="idx-t">Equipping saints for maturity in Christ</span></div>
+      <div class="idx-hd">Community &amp; Multiplication</div>
+      <div class="idx-row"><span class="idx-r">2 Tim. 2:2</span><span class="idx-t">Entrust to faithful who will teach others</span></div>
+      <div class="idx-row"><span class="idx-r">Acts 13:1–3</span><span class="idx-t">Antioch sending model</span></div>
+      <div class="idx-row"><span class="idx-r">Gal. 2:9–10</span><span class="idx-t">Fellowship; open hands to sent communities</span></div>
+      <div class="idx-row"><span class="idx-r">Phil. 1:3–5</span><span class="idx-t">Partnership in the gospel</span></div>
+      <div class="idx-row"><span class="idx-r">1 Cor. 12:4–6</span><span class="idx-t">Varieties of gifts, same Spirit</span></div>
+      <div class="idx-row"><span class="idx-r">2 Cor. 9:7</span><span class="idx-t">Cheerful giving; financial stewardship</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN FOOTER -->
+<footer id="site-footer">
+  <div class="footer-inner">
+    <div>
+      <div class="foot-brand">VISION 1,000 · CCCC</div>
+      <p class="foot-desc">"For no one can lay any foundation other than the one already laid, which is Jesus Christ." — 1 Cor. 3:11</p>
+      <p class="foot-desc" style="margin-top:.5rem">"The least of you will become a thousand." — Isa. 60:22</p>
+    </div>
+    <div>
+      <div class="foot-col-title">Sections</div>
+      <ul class="foot-links">
+        <li><a href="#executive">Executive Summary</a></li>
+        <li><a href="#foundations">Biblical Foundations</a></li>
+        <li><a href="#theological">Theological Vision</a></li>
+        <li><a href="#discipleship">Discipleship</a></li>
+        <li><a href="#livelihood">Livelihood Programs</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="foot-col-title">More</div>
+      <ul class="foot-links">
+        <li><a href="#school">School Vision</a></li>
+        <li><a href="#structure">Organizational Structure</a></li>
+        <li><a href="#milestones">Growth Milestones</a></li>
+        <li><a href="#sending">Multiplication Strategy</a></li>
+        <li><a href="#scripture-index">Scripture Index</a></li>
+        <li><a href="#" onclick="showPage('blog');return false">Updates &amp; Blog</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <p>Christ-Centered Community Church · Bacolod City, Philippines · Soli Deo Gloria</p>
+    <p class="foot-verse">"He who began a good work in you will carry it on to completion." — Phil. 1:6</p>
+  </div>
+</footer>
+
+</div><!-- /page-main -->
+<!-- BLOG / UPDATES PAGE -->
+<div id="page-blog" class="page">
+  <div class="blog-hero">
+    <div class="blog-hero-inner">
+      <div class="eyebrow">Updates &amp; Messages</div>
+      <h1 class="blog-hero-title">From the <em style="color:var(--gold2);font-style:normal">Community</em></h1>
+      <p class="blog-hero-sub">Pastoral messages, progress reports, vision updates, and testimonies from within CCCC Vision 1,000.</p>
+    </div>
+  </div>
+  <div class="blog-filters">
+    <div class="blog-filters-inner">
+      <button class="f-btn on" onclick="filterPosts('all',this)">All</button>
+      <button class="f-btn" onclick="filterPosts('message',this)">Messages</button>
+      <button class="f-btn" onclick="filterPosts('report',this)">Reports</button>
+      <button class="f-btn" onclick="filterPosts('update',this)">Updates</button>
+      <button class="f-btn" onclick="filterPosts('testimony',this)">Testimonies</button>
+    </div>
+  </div>
+  <div class="blog-grid-wrap">
+    <div class="blog-grid">
+      <div class="post-grid" id="post-grid">
+        <!-- FEATURED -->
+        <div class="post-featured" data-cat="message">
+          <div class="img-ph" style="min-height:260px;border-radius:0"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Featured Post Image</span></div>
+          <div class="post-content">
+            <div class="post-meta"><span class="post-cat">Message</span><span class="post-date">Add date here</span></div>
+            <a class="post-title" href="#">Welcome to Vision 1,000 — A Word from the Founding Community</a>
+            <p class="post-excerpt">This is a placeholder for your first featured message. Replace this with a pastoral letter, vision update, or opening word from the founding leaders of CCCC. This post will appear prominently at the top of the page.</p>
+            <a class="post-readmore" href="#">Read more →</a>
+          </div>
+        </div>
+        <!-- POST 2 -->
+        <div class="post-card" data-cat="report">
+          <div class="post-img"><div class="img-ph" style="border-radius:0;border:none;min-height:100%;height:160px"><svg viewBox="0 0 24 24" style="width:24px;height:24px"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Photo</span></div></div>
+          <div class="post-content">
+            <div class="post-meta"><span class="post-cat" style="color:var(--gold2);background:rgba(196,146,42,.08);border-color:rgba(196,146,42,.2)">Report</span><span class="post-date">Add date</span></div>
+            <a class="post-title" href="#">Community Growth Report — Placeholder</a>
+            <p class="post-excerpt">Replace this with a quarterly or monthly report on community growth, livelihood programs, or school progress. Add relevant numbers, testimonies, and next steps.</p>
+            <a class="post-readmore" href="#">Read more →</a>
+          </div>
+        </div>
+        <!-- POST 3 -->
+        <div class="post-card" data-cat="testimony">
+          <div class="post-img"><div class="img-ph" style="border-radius:0;border:none;min-height:100%;height:160px"><svg viewBox="0 0 24 24" style="width:24px;height:24px"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Photo</span></div></div>
+          <div class="post-content">
+            <div class="post-meta"><span class="post-cat" style="color:#6BAA4A;background:rgba(100,180,50,.06);border-color:rgba(100,180,50,.2)">Testimony</span><span class="post-date">Add date</span></div>
+            <a class="post-title" href="#">A Life Transformed — Member Testimony Placeholder</a>
+            <p class="post-excerpt">Replace this with a real member testimony. Stories of changed lives are the most powerful evidence that the vision is being realized. The 1,000 is built one story at a time.</p>
+            <a class="post-readmore" href="#">Read more →</a>
+          </div>
+        </div>
+        <!-- POST 4 -->
+        <div class="post-card" data-cat="update">
+          <div class="post-img"><div class="img-ph" style="border-radius:0;border:none;min-height:100%;height:160px"><svg viewBox="0 0 24 24" style="width:24px;height:24px"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Photo</span></div></div>
+          <div class="post-content">
+            <div class="post-meta"><span class="post-cat" style="color:#5A90C8;background:rgba(50,120,200,.06);border-color:rgba(50,120,200,.2)">Update</span><span class="post-date">Add date</span></div>
+            <a class="post-title" href="#">Vision Update — Placeholder</a>
+            <p class="post-excerpt">Replace with a vision update — new developments, answered prayers, upcoming milestones, or changes in direction. Keep the community informed and encouraged.</p>
+            <a class="post-readmore" href="#">Read more →</a>
+          </div>
+        </div>
+      </div><!-- /post-grid -->
+
+      <!-- SIDEBAR -->
+      <div class="blog-sidebar">
+        <div class="sidebar-widget">
+          <div class="sw-title">Categories</div>
+          <div class="sw-body">
+            <ul class="cat-list">
+              <li><a href="#">Pastoral Messages</a><span class="cat-count">—</span></li>
+              <li><a href="#">Progress Reports</a><span class="cat-count">—</span></li>
+              <li><a href="#">Vision Updates</a><span class="cat-count">—</span></li>
+              <li><a href="#">Testimonies</a><span class="cat-count">—</span></li>
+              <li><a href="#">School News</a><span class="cat-count">—</span></li>
+              <li><a href="#">Livelihood Stories</a><span class="cat-count">—</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="sidebar-widget">
+          <div class="sw-title">Recent Posts</div>
+          <div class="sw-body">
+            <ul class="recent-list">
+              <li class="recent-item">
+                <div class="img-ph" style="width:54px;height:54px;min-height:unset;border-radius:4px;flex-shrink:0"><svg viewBox="0 0 24 24" style="width:14px;height:14px"><rect x="3" y="3" width="18" height="18" rx="2"/></svg><span style="font-size:7px">IMG</span></div>
+                <div><a class="recent-item-title" href="#">Placeholder Post Title</a><div class="recent-item-date">Add date</div></div>
+              </li>
+              <li class="recent-item">
+                <div class="img-ph" style="width:54px;height:54px;min-height:unset;border-radius:4px;flex-shrink:0"><svg viewBox="0 0 24 24" style="width:14px;height:14px"><rect x="3" y="3" width="18" height="18" rx="2"/></svg><span style="font-size:7px">IMG</span></div>
+                <div><a class="recent-item-title" href="#">Another Placeholder</a><div class="recent-item-date">Add date</div></div>
+              </li>
+              <li class="recent-item">
+                <div class="img-ph" style="width:54px;height:54px;min-height:unset;border-radius:4px;flex-shrink:0"><svg viewBox="0 0 24 24" style="width:14px;height:14px"><rect x="3" y="3" width="18" height="18" rx="2"/></svg><span style="font-size:7px">IMG</span></div>
+                <div><a class="recent-item-title" href="#">Placeholder Three</a><div class="recent-item-date">Add date</div></div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sidebar-widget">
+          <div class="sw-title">Tags</div>
+          <div class="sw-body">
+            <div class="tag-cloud">
+              <a class="tag" href="#">Vision 1000</a><a class="tag" href="#">Discipleship</a>
+              <a class="tag" href="#">Livelihood</a><a class="tag" href="#">School</a>
+              <a class="tag" href="#">Sending</a><a class="tag" href="#">Testimony</a>
+              <a class="tag" href="#">Prayer</a><a class="tag" href="#">Growth</a>
+              <a class="tag" href="#">Abad Shamar</a>
+            </div>
+          </div>
+        </div>
+        <div class="notify-bar">
+          <p>New posts will appear here as the community grows and vision advances.</p>
+          <a href="#">Subscribe</a>
+        </div>
+        <div class="admin-note">
+          <strong>Admin Note</strong>
+          <p>Replace the placeholder posts with real messages, reports, testimonies, and updates. Each post card accepts a photo, category, date, title, and excerpt. Photos go where the dashed image placeholders are.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer id="site-footer" style="margin-top:0">
+    <div class="footer-inner">
+      <div>
+        <div class="foot-brand">VISION 1,000 · CCCC</div>
+        <p class="foot-desc">"He who began a good work in you will carry it on to completion." — Phil. 1:6</p>
+      </div>
+      <div>
+        <div class="foot-col-title">Navigation</div>
+        <ul class="foot-links">
+          <li><a href="#" onclick="showPage('main');window.scrollTo(0,0);return false">← Back to Vision Document</a></li>
+          <li><a href="#executive" onclick="showPage('main')">Executive Summary</a></li>
+          <li><a href="#theological" onclick="showPage('main')">Theological Vision</a></li>
+          <li><a href="#scripture-index" onclick="showPage('main')">Scripture Index</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="foot-col-title">Post Categories</div>
+        <ul class="foot-links">
+          <li><a href="#">Messages</a></li><li><a href="#">Reports</a></li>
+          <li><a href="#">Updates</a></li><li><a href="#">Testimonies</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p>Christ-Centered Community Church · Bacolod City, Philippines</p>
+      <p class="foot-verse">Soli Deo Gloria</p>
+    </div>
+  </footer>
+</div><!-- /page-blog -->
+
+<script>
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+const secs=document.querySelectorAll('section[id]');
+window.addEventListener('scroll',()=>{
+  if(!document.getElementById('page-main').classList.contains('active'))return;
+  let cur='';
+  secs.forEach(s=>{if(s.getBoundingClientRect().top<=80)cur=s.id});
+  document.querySelectorAll('.nav-links a').forEach(a=>{
+    a.classList.toggle('active',a.getAttribute('href')==='#'+cur);
+  });
+},{passive:true});
+const ro=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in')})},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+function filterPosts(cat,btn){
+  document.querySelectorAll('.f-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('#post-grid>div').forEach(c=>{
+    c.style.display=(cat==='all'||c.dataset.cat===cat)?'':'none';
+  });
+}
+</script>
+</body>
+</html>
